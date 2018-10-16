@@ -1,0 +1,208 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+header{
+	.navbar{
+		padding: 0rem 6rem !important;
+		#navbarNav{
+			flex-direction: row-reverse;
+			ul li{
+				margin: 0px 5px 0px 5px;
+				line-height: 3.0em !important;
+				font-size: 0.8em;
+				a{
+					margin-top: 5px;
+					color: #07C;
+				}
+				a:hover{
+					background-color: transparent;
+					color: #000;
+				}
+				.btn{
+					font-size: 1em !important;
+				}
+			}
+		}
+	}
+}
+
+.page-content{
+	margin: 10px 100px !important;
+}
+
+.pull-left{
+	float: left;
+}
+
+.pull-right{
+	float: right;
+}
+
+.footer{
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #242729;
+	color: #848d95;
+	font-size: 0.83em; 
+
+	h5 a{
+		color: #bbc0c4;
+		font-weight: bold;
+		font-size: 0.83em;
+	}
+
+	.footer-content{
+		padding: 50px 150px;
+		ul {
+			padding-inline-start: 0px;
+		}
+		ul li{
+			line-height: 2em;
+			list-style: none;
+		}
+	}
+}
+
+.sidebar{
+	padding-top: 70px;
+	padding-right: 0px !important;
+    border-right: #e4e6e8 solid 1px;
+    font-size: 0.8em;
+	nav{
+		ul li{
+			list-style: none;
+			color: #848d95;
+		}
+		a{
+			color: #848d95;
+		}
+		a:hover{
+			color: #000;
+		}
+		a:active{
+			color: #000;
+		}
+		a.active{
+			color: #000;
+			font-weight: bold;
+			background-color: rgba(12,13,14,0.05);
+			border-right: 4px solid #F48024;
+		}
+
+	}
+}
+
+.main-content{
+	padding-top: 60px;
+}
+
+.container-header{
+	margin-left: 100px !important;
+	margin-bottom: 1px !important;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #e4e6e8;
+	.header-tabs{
+		margin-left: -120px;
+		margin-bottom: -0.95px;
+		.tab-button{
+			border-top: transparent solid 2px;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			border-bottom-color: #e4e6e8;
+			padding-left: 10px;
+			padding-right: 10px;
+			p{
+				padding-top: 10px;
+				margin-bottom: 0.5rem !important;
+				font-size: 0.65em;
+			}
+		}
+		.tab-button.active{
+			border-style: solid;
+			border-color: #e4e6e8;
+			border-width: 1px;
+			border-top-color: #F48024;
+			border-top-width: 3px;
+			border-bottom-color: transparent;
+			
+		}
+	}
+}
+/*for will paginate design*/
+.my_pagination{
+  background: white;
+  cursor: default;
+	  a, span, em{
+	    padding: 0.2em 0.5em;
+	    display: block;
+	    float: left;
+	    margin-right: 1px;
+	}
+  	.disabled{
+  		color: #999999;
+        border: 1px solid #dddddd;
+    }
+  	.current{
+	    font-style: normal;
+	    font-weight: bold;
+	    background: #2e6ab1;
+	    color: white;
+	    border: 1px solid #2e6ab1;
+	}
+  	a{
+	    text-decoration: none;
+	    color: #105cb6;
+	    border: 1px solid #9aafe5;
+	    &:hover, &:focus{
+			color: #000033;
+			border-color: #000033;
+		}
+  	}
+	.page_info{
+	    background: #2e6ab1;
+	    color: white;
+	    padding: 0.4em 0.6em;
+	    width: 22em;
+	    margin-bottom: 0.3em;
+	    text-align: center;
+	}
+    b{
+		color: #000033;
+        background: #2e6ab1 + 60;
+        padding: 0.1em 0.25em;
+    }
+  /* self-clearing method: */
+  	&:after{
+		content: ".";
+	    display: block;
+	    height: 0;
+	    clear: both;
+	    visibility: hidden;
+  	}
+  * html &{
+    	height: 1%;
+  	}
+  *:first-child+html & {
+    	overflow: hidden;
+    }
+ }
+@import "../font-awesome/scss/fontawesome.scss";
+@import "../font-awesome/scss/solid.scss";
+@import "../font-awesome/scss/regular.scss";
+@import "../font-awesome/scss/brands.scss";
+@import "bootstrap";

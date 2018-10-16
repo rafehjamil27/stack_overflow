@@ -1,0 +1,41 @@
+<%= form_for(@user, :class => "col-lg-12") do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <strong><%= pluralize(@user.errors.count, "error") %> prohibits you from signing up:</strong>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label(:name, 'Display Name' )%><br>
+    <%= f.text_field(:name, :class => "form-control form-control-sm", :placeholder => "J. Doe") %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:email, "Email (required, but never shown)") %><br>
+    <%= f.text_field(:email, :class => "form-control form-control-sm", :placeholder => "you@example.com") %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %><br>
+    <%= f.password_field(:password, :class => "form-control form-control-sm", :placeholder => "******") %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field(:password_confirmation, :class => "form-control form-control-sm", :placeholder => "*****") %>
+  </div>
+  <div class="form-group">
+    <%= f.label :avatar %><br>
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="form-group">
+    <%= f.submit("Sign Up", :class => "btn btn-primary btn-lg pull-right form-control") %>
+  </div><br>
+  <div class="policy form-group">By clicking "Sign up", you acknowledge that you have read our updated <span>terms of service, privacy policy </span>and <span>cookie policy</span>, and that your continued use of the website is subject to these policies.</div>
+<% end %>

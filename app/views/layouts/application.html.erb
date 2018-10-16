@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StackOverflow</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='<%= controller.controller_name %>'>
+
+	<!-- top navigational bar -->
+	<header>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+			<a class="navbar-brand" href="#">
+				<%= image_tag("logo.png", :width => "150", :height => "40") %>
+			</a>
+			<%= form_tag(questions_path, method: :get, :class => "form-inline") do %>
+				<div class="input-group input-group-sm ">
+					<%= text_field_tag(:search_txt, @search_txt, :class => "form-control", :placeholder => "Search") %>
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+					</div>
+				</div>
+			<% end %>		
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    	<span class="navbar-toggler-icon"></span>
+		  	</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<% if user_signed_in? %> 
+						<li>
+							<p><%= current_user.name %></p>
+						</li>
+						<li class="nav-item">
+						<%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-sm btn-primary')%>
+						</li>
+					<% else %>
+						<li class="nav-item">
+							<a href="<%= new_user_session_path %>">Log In</a>
+						</li>
+						<li class="nav-item">
+							<%= button_to('Sign up', new_user_registration_path, method: :get, :class => 'btn btn-sm btn-primary')%>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div class="banner container-fluid" style="display: none !important">
+		<div class="banner-content">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<h4>Learn, Share, Build</h4>
+					<br/>
+					<p>Each month, over 50 million developers come to Stack Overflow to learn, share <br/> theri knowledge, and build their careers.</p>
+					<br/>
+					<p>Join the world's largest developer community.</p>
+				</div>
+				<div class="col-lg-6">
+					<div class="row  justify-content-center align-self-center">
+						<button type="button" class="btn btn-outline-light btn-google"><i class="fab fa-google"></i> Google</button>
+						<button type="button" class="btn btn-outline-primary btn-facebook"><i class="fab fa-facebook"></i>  Facebook</button>
+						<button type="button" class="btn btn-outline-light btn-signup">Sign Up</button>
+					</div>
+					<div class="row justify-content-center align-self-center">
+						<p class="cookie-policy">By clicking "Sign Up", you acknowledge that you have read our updated <span>terms of service, privary policy</span> and <span>cookie policy</span><br/>and that your continued use of the website is subject to these policies.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 banner-footer">
+			<p><strong>Stack Overflow Business Solutions: </strong>Looking to understand, engage, or hire develoeprs? <strong><a href="#">Learn more >></a></strong></p>
+		</div>
+	</div>
+
+	<div class="page-content row">
+		<!-- side navigational bar -->
+		<div class="sidebar col-lg-2 pull-left">
+			<nav class="nav flex-column justify-content-end">
+				<a class="nav-link active" href="<%= questions_path %>">Home</a>
+				<a class="nav-link" href="#"><i class="fas fa-globe-americas"></i>  Public</a>
+				<ul>
+					<li><a class="nav-link" href="#"> Tags</a></li>
+					<% if user_signed_in? %>
+					<li><a class="nav-link" href="<%= user_path(current_user.id) %>"> Users</a></li>
+					<% end %>
+					<li><a class="nav-link" href="#"> Jobs</a></li>
+					<% if can? :manage, User %>
+						<li><a class="nav-link" href="<%= users_path %>">Manage Users</a></li>
+					<% end %>
+				</ul>
+			</nav>
+		</div>	
+		<div class="main-content col-lg-10">
+			<% if notice %>
+			    <div class="alert alert-success alert-dismissible" role="alert">
+			      <%= notice %>
+			      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			    </div>
+		  	<% end %>
+			<%= yield %>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="footer-content">
+			<div class="row">
+				<div class="col-lg-2">
+					<h5><a href="#">Stack Overflow</a></h5>
+					<ul>
+						<li>Questions</li>
+						<li>Jobs</li>
+						<li>Developer Jobs Directory</li>
+						<li>Salary Calculator</li>
+						<li>Help</li>
+						<li>Mobile</li>
+						<li>Disable Responsiveness</li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<h5><a href="#">Products</a></h5>
+					<ul>
+						<li>Teams</li>
+						<li>Talent</li>
+						<li>Engagement</li>
+						<li>Enterprise</li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<h5><a href="#">Company</a></h5>
+					<ul>
+						<li>About</li>
+						<li>Press</li>
+						<li>Work Here</li>
+						<li>Legal</li>
+						<li>Privacy Policy</li>
+						<li>Contact Us</li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<h5><a href="#">Stack Exchange Network</a></h5>
+					<ul>
+						<li>Technology</li>
+						<li>Life / Arts</li>
+						<li>Culture / Recreation</li>
+						<li>Science</li>
+						<li>Other</li>
+					</ul>
+				</div>
+				<div class="col-lg-4">
+					<p>site design / logo © 2018 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required. rev 2018.10.4.31811</p>
+				</div>
+			</div>
+		</div>		
+	</div>
+</body>
+</html>

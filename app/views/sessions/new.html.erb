@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="container-header col-lg-12">
+		<div class="header-tabs row">
+			<div class="tab-button active">
+				<p><a href="<%= login_path %>">Log in</a> </p>
+			</div>
+			<div class="tab-button">
+				<p><a href="<%= new_user_path %>">Sign up</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="container-body col-lg-12">
+		<% if flash[:alert] %>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<%= flash[:alert] %>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   				<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		<% end %>
+		<h5>Stack Overflow is part of the Stack<span class="exchange-txt">Exchange</span> network of 173 Q&A <span>communities</span></h5>
+		<div class="row center-block justify-content-center align-items-center">
+			<div class="login-form row col-lg-5 justify-content-center">
+				<div class="col-lg-12 social-btns">
+					<button type="button" class="btn btn-block btn-outline-light btn-google"><i class="fab fa-google"></i> Google</button>
+					<button type="button" class="btn btn-block btn-outline-primary btn-facebook"><i class="fab fa-facebook"></i>  Facebook</button>
+				</div>
+				<%= form_tag("", :class => "col-lg-12",) do %>
+					<fieldset class="row">
+						<div class="form-group">
+							<%= label_tag :email, 'Email ' %><br>
+							<%= text_field_tag(:email, params[:email], :class => "form-control", :placeholder => "you@example.org") %>
+						</div>
+						<div class="form-group">
+							<%= label_tag :password, 'Password ' %><br>
+							<%= password_field_tag(:password, params[:password], :class => "form-control", :placeholder => "*********") %>
+						</div>
+						<div class="form-group">
+							<%= submit_tag("Log in", :class => "btn btn-primary btn-lg pull-right") %>
+						</div>
+					</fieldset>
+				<% end %>
+			</div>
+		</div>
+		<div class="row center-block justify-content-center align-items-center">
+			<div class="col-lg-5 login-form">
+				<p class="help-text">Don't have an account? <a href="<%= new_user_path %>">Sign up</a></p>
+				<p class="help-text">Are you an employer? <a href="#">Log in Talent</a></p>
+			</div>
+		</div>
+	</div>
+</div>

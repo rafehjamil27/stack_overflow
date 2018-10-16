@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h4><%= @title %> </h4>
+  <% if user_signed_in? %>
+    <%= link_to 'Ask Question', new_question_path, :class => "btn btn-primary pull-right", :method => :get %>
+    <br><br><br>
+  <% end %>
+
+  <div class="btn-group pull-right" role="group" aria-label="Button Filters">
+    <a type="button" href="<%= questions_path :answered => "true" %>" class="btn btn-outline-secondary <%= @answered %>">Answered</a>
+    <a type="button" href="<%= questions_path :un_answered => "true" %>" class="btn btn-outline-secondary <%= @un_answered %>">Unanswered</a>
+    <% if user_signed_in? %>
+      <a type="button" href="<%= questions_path :answered_by_me => "true" %>"  class="btn btn-outline-secondary <%= @by_me %>">Asked By Me</a>
+    <% end %>
+    <a type="button" href="<%= questions_path %>" class="btn btn-outline-secondary <%= @top_q %>">Top Questions</a>
+  </div>
+  <br><br>
+   <div class="btn-group pull-right" role="group" aria-label="Button Filters">
+    <a type="button" href="<%= questions_path :created_at => "true" %>" class="btn btn-outline-secondary <%= @by_created_at %>">Created Date</a>
+    <a type="button" href="<%= questions_path :title => "true" %>" class="btn btn-outline-secondary <%= @by_title %>">Title</a>
+    <a type="button" href="<%= questions_path :by_answers => "true" %>"  class="btn btn-outline-secondary <%= @by_ans %>"># of Answers</a>
+  </div>
+  <p class="pull-right" style="padding-top: 10px;">Sort By: </p>
+  <table class="table questions-table col-lg-12">
+    <thead>
+      <%= will_paginate @questions, :class => 'my_pagination' %>
+      <tr>
+        <th style="width: 15%"></th>
+        <th style="width: 75%"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @questions %>
+    </tbody>
+  </table>
+  <br>
+</div>

@@ -1,0 +1,23 @@
+<tr>
+  <td class="row">
+    <div class="votes">
+      <div class="mini-counts">
+        <span class="mini-title">1</span>
+      </div>
+      <div>vote</div>
+    </div>
+    <div class="votes active">
+      <div class="mini-counts">
+        <span class="mini-title"><%=question.answers.count%></span>
+      </div>
+      <div>answers</div>
+    </div>
+  </td>
+  <td><%= link_to "#{question.title}", question %><br>
+    <span class="tags-list pull-left"> 
+      <% question.tags.each do |tag| %>
+        <%= link_to "#{tag.name}", '#' %> 
+      <% end %>
+    </span>
+    <span class="pull-right">created_at: <%= question.created_at %></span> </td>
+</tr>

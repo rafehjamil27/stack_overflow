@@ -1,0 +1,55 @@
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.banner {
+	display: block !important;
+	color: white;
+	padding-top: 155px;
+	overflow: hidden;
+	background-color: #117bf3;
+	background-image: url('https://cdn.sstatic.net/img/hero/pattern.svg?v=13ca42e6c21d'),linear-gradient(to right, #126CFA 0%, #108AEC 100%);
+	background-position: right center, center center;
+	background-repeat: no-repeat,no-repeat;
+
+	.banner-content{
+		margin: 0px 50px 50px 50px;
+		.btn{
+			margin: 0px 10px 0px 10px;
+			padding: 10px 50px 10px 50px;
+		}
+		.btn-facebook{
+			color: #fff;
+			background-color: #385499;
+		}
+		.btn-google{
+			color: #535a60;
+			background-color: #fff;
+		}
+		.btn-signup{
+			padding: 10px 65px;
+		}
+		.cookie-policy{
+			margin-top: 10px;
+			font-size: 0.6em;
+			text-align: center;
+			color: #d1d1d1;
+			span{
+				color: white;
+			}
+		}
+	}
+
+	.banner-footer{
+		position: absolute;
+		margin-left: -15px;
+		padding-top: 20px;
+		padding-left: 65px;
+		font-size: 0.8em;
+		background-color: #0b6cda;
+		background-image: linear-gradient(to right, #055de8 0%, #0e79cf 100%);
+		a{
+			color: white;
+		}
+	}
+}
