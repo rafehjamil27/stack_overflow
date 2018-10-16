@@ -18,6 +18,18 @@ class ApplicationController < ActionController::Base
 	# 	  store_location_for(:user, request.fullpath)
 	# 	end
 	# end
+
+	rescue_from CanCan::AccessDenied do |exception|
+
+		case exception.action
+		when :show
+			redirect_to users_url, :alert => exception.message
+		else
+			redirect_to root_url, :alert => exception.message
+		end
+		
+	end
+
 protected
 	
 	def configure_permitted_parameters

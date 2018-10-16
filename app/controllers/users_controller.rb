@@ -7,11 +7,13 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    authorize! :index, @users, :message => "Access Denied!"
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    authorize! :show, @user, :message => "Can not access this user!"
   end
 
   # GET /users/new

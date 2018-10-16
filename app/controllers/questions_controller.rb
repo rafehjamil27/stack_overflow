@@ -48,6 +48,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    authorize! :new, @question, :message => "You need to login first"
   end
 
   # GET /questions/1/edit
