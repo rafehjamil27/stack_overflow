@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'question_tags/new'
 
   get 'question_tags/create'
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :questions
 
   resources :users
+
+  post 'users/:id/toggle_active' => 'users#toggle_active'
 
   controller :sessions do
     get 'login' => :new

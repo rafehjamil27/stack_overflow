@@ -32,7 +32,7 @@
   </div>
   <div class="form-group">
     <%= f.label :avatar %><br>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, :required => true %>
   </div>
   <div class="form-group">
     <%= f.submit("Sign Up", :class => "btn btn-primary btn-lg pull-right form-control") %>

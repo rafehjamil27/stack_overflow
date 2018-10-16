@@ -11,27 +11,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td>
-          <label class="switch">
-            <% if user.is_active? %>
-              <input class="admin-checkbox" type="checkbox" checked>
-            <% else %>
-              <input class="admin-checkbox" type="checkbox">
-            <% end %>
-            <span class="slider round"></span>
-          </label>  
-        </td>
-        <td><%= user.is_admin %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <tbody class="users-body">
+    <%= render @users %>
   </tbody>
 </table>
 

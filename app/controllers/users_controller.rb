@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_active]
   before_action :authenticate_user!
   # GET /users
   # GET /users.json
@@ -60,6 +60,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_active
+    # @user.is_active = false if @user.is_active?
+    # @user.is_active = true unless @user.is_active?
+    # @user.save
+    if @user.is_active? then @user.update(:is_active => "0") 
+    else @user.update(:is_active => true) end
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User de-activated' }
+      format.json { render json: @users = User.all }
     end
   end
 
