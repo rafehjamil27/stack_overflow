@@ -64,9 +64,10 @@ class UsersController < ApplicationController
   end
 
   def toggle_active
-    # @user.is_active = false if @user.is_active?
-    # @user.is_active = true unless @user.is_active?
-    # @user.save
+    if @user.is_admin?
+      redirect_to users_url, notice: "Can not deactivate Admin user"
+      return
+    end
     if @user.is_active? then @user.update(:is_active => "0") 
     else @user.update(:is_active => true) end
     respond_to do |format|

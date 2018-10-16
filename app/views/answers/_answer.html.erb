@@ -7,7 +7,7 @@
 		<br>
 		<span class="answer-vote-<%=answer.id%>"><%= answer.votes.to_a.sum {|vote| vote.count} %></span><br>
 		<% if user_signed_in? %>
-		<a href="/votes/destroy?answer_id=<%=answer.id%>"><i class="fas fa-caret-square-down"></i></a>
+		<%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?answer_id=#{answer.id}", :method => :delete, :remote => true %>
 		<% end %>
 	</div>
 	<p><%=answer.body%></p>

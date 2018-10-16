@@ -4,7 +4,11 @@
   <td>
     <label class="switch">
       <% if user.is_active? %>
-        <input data-user-id="<%=user.id%>" class="admin-checkbox" type="checkbox" checked>
+        <% if user.is_admin? %>
+          <input data-user-id="<%=user.id%>" class="admin-checkbox" type="checkbox" checked disabled>
+        <% else %>
+          <input data-user-id="<%=user.id%>" class="admin-checkbox" type="checkbox" checked>
+        <% end %>
       <% else %>
         <input data-user-id="<%=user.id%>" class="admin-checkbox" type="checkbox">
       <% end %>
@@ -14,7 +18,7 @@
   <td><%= user.is_admin %></td>
   <td><%= link_to 'Show', user %></td>
   <td><%= link_to 'Edit', edit_user_path(user) %></td>
-  <% unless user.is_admin? %>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  <% end %>
+  <td><% unless user.is_admin? %>
+    <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %></td>
 </tr>
