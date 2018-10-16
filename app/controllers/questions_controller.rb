@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   include CurrentUser
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:create, :index]
+  before_action :set_sidebar_tag
   # GET /questions
   # GET /questions.json
   def index
@@ -103,5 +104,9 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :body)
+    end
+
+    def set_sidebar_tag
+      @question_tag = "active"
     end
 end

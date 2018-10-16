@@ -28,10 +28,13 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<% if user_signed_in? %> 
-						<li>
+						<li style="margin-top: 10px;">
 							<p><%= current_user.name %></p>
 						</li>
-						<li class="nav-item">
+						<li style="margin-top: 10px;">
+							<%= image_tag current_user.avatar.url(:thumb), :class => "pull-left", :style => "margin-right: 20px;" %>
+						</li>
+						<li class="nav-item" style="margin-top: 10px;">
 						<%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-sm btn-primary')%>
 						</li>
 					<% else %>
@@ -78,16 +81,18 @@
 		<!-- side navigational bar -->
 		<div class="sidebar col-lg-2 pull-left">
 			<nav class="nav flex-column justify-content-end">
-				<a class="nav-link active" href="<%= questions_path %>">Home</a>
+				<a class="nav-link <%=@question_tag%>" href="<%= questions_path %>">Home</a>
 				<a class="nav-link" href="#"><i class="fas fa-globe-americas"></i>  Public</a>
 				<ul>
 					<li><a class="nav-link" href="#"> Tags</a></li>
 					<% if user_signed_in? %>
-					<li><a class="nav-link" href="<%= user_path(current_user.id) %>"> Users</a></li>
+					<li><a class="nav-link <%=@user_tag%>" href="<%= user_path(current_user.id) %>"> Users</a></li>
+					<% else %>
+					<li><a class="nav-link <%=@user_tag%>" href="<%=new_user_session_path%>"> Users</a></li>
 					<% end %>
 					<li><a class="nav-link" href="#"> Jobs</a></li>
 					<% if can? :manage, User %>
-						<li><a class="nav-link" href="<%= users_path %>">Manage Users</a></li>
+						<li><a class="nav-link <%=@admin_user_tag%>" href="<%= users_path %>">Manage Users</a></li>
 					<% end %>
 				</ul>
 			</nav>

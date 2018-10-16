@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_active]
   before_action :authenticate_user!
+  before_action :set_sidebar_tag, only: [:show, :edit, :update, :destroy, :toggle_active]
+  before_action :set_admin_sidebar_tag, only: [:index]
   # GET /users
   # GET /users.json
   def index
@@ -85,5 +87,13 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+    end
+
+    def set_sidebar_tag
+      @user_tag = "active"
+    end
+
+    def set_admin_sidebar_tag
+      @admin_user_tag = "active"
     end
 end
