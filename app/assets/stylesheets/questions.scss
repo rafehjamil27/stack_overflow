@@ -1,6 +1,10 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.container{
+	margin-top: 50px;
+}
+
 form{
 	label{
 		font-weight: bold;
@@ -13,6 +17,7 @@ form{
 
 .btn-group{
 	a{
+		color: grey;
 		background-color: white;
 	}
 	a.active{
@@ -20,7 +25,7 @@ form{
 		background-color: rgba(174, 192, 209, 1) !important;
 	}
 	a:visited{
-		color: black !important;
+		color: grey;
 	}	
 }
 

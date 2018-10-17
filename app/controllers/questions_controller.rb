@@ -3,41 +3,35 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:create, :index]
   before_action :set_sidebar_tag
+  helper_method :sort_column, :sort_direction
   # GET /questions
   # GET /questions.json
   def index
-    if params[:search_txt]
+    @questions = Question.select("questions.* ,COUNT(answers.id) answer_count").joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id").group("questions.id").paginate(:page => params[:page])
+    if params[:filter] == "search"
       @title = "Search Results"
       @search_txt = params[:search_txt]
-      @questions = Question.joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id").where("questions.title LIKE '%#{params[:search_txt]}%' OR questions.body LIKE '%#{params[:search_txt]}%' OR answers.body LIKE '%#{params[:search_txt]}%'").paginate(:page => params[:page])
-    elsif params[:answered_by_me]
+      @questions = @questions.where("questions.title LIKE '%#{params[:search_txt]}%' OR questions.body LIKE '%#{params[:search_txt]}%' OR answers.body LIKE '%#{params[:search_txt]}%'")
+    elsif params[:filter] == "answered_by_me"
       @title = "Questions Asked By Me"
       @by_me = "active"
-      @questions = @user.questions.paginate(:page => params[:page])
-    elsif params[:answered]
+      @questions = @questions.where("questions.user_id = #{@user.id}")
+    elsif params[:filter] == "answered"
       @title = "Answered Questions"
       @answered = "active"
-      @questions = Question.joins(:answers).paginate(:page => params[:page])
-    elsif params[:un_answered]
+      @questions = @questions.where("answers.id IS NOT NULL")
+    elsif params[:filter] == "un_answered"
       @title = "Unanswered Questions"
-      @un_answered = "active"
-      @questions = Question.where('questions.id NOT IN (SELECT DISTINCT(question_id) FROM answers)').paginate(:page => params[:page])        
+      @un_answered = "active"        
+      @questions = @questions.where("answers.id IS NULL")
     else
       @title = "Top Questions"
       @top_q = "active"
-      @questions = Question.paginate(:page => params[:page])
     end
+    
     # sorting
-    if params[:by_answers]
-      @by_ans = "active"
-      @questions = Question.select("questions.*, COUNT(answers.id) answer_count").joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id").group("questions.id").order("answer_count DESC").paginate(:page => params[:page])
-    elsif params[:title]
-      @by_title = "active"
-      @questions = @questions.order(title: :asc)
-    else
-      @by_created_at = "active"
-      @questions = @questions.order(created_at: :asc)
-    end  
+    @questions = @questions.order(sort_column + " " + sort_direction)
+ 
   end
 
   # GET /questions/1
@@ -109,5 +103,13 @@ class QuestionsController < ApplicationController
 
     def set_sidebar_tag
       @question_tag = "active"
+    end
+
+    def sort_column
+      Question.column_names.include?(params[:sort]) ? params[:sort] : "answer_count"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

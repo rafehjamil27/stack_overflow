@@ -2,7 +2,7 @@
   <td class="row">
     <div class="votes">
       <div class="mini-counts">
-        <span class="mini-title">1</span>
+        <span class="mini-title"><%=question.votes.to_a.sum {|vote| vote.count}%></span>
       </div>
       <div>vote</div>
     </div>
