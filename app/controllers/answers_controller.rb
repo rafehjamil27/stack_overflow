@@ -1,45 +1,62 @@
 class AnswersController < ApplicationController
-  include CurrentUser
-  before_action :set_user, only: [:create, :edit]
-  before_action :set_answer, only: [:edit, :update, :destroy]
-
-  def new
-  end
-
+  # POST /answers
   def create
-    q = Question.find(params[:question_id])
-    q.answers.create(:user => @user, :body => params[:body])
+    @question = Question.find(params[:question_id])
+
+    @answers = @question.answers
 
     respond_to do |format|
-      format.html { redirect_to question_url(q.id), notice: "Answer added successfully!!" }      
-      format.js { @answers = q.answers }
-      format.json { render json: @answers}
+      if @question.answers.create(:user => current_user, :body => params[:body])
+        format.html { redirect_to question_url(@question), notice: "Answer added successfully!!" }      
+        format.js { @answers = @question.answers }
+      else
+        format.html { redirect_to question_url(@question), alert: "Unable to add answer!!" }      
+        format.js { @error = "Unable to add answer!!" }
+      end
     end
   end
 
+  # GET /answers/1/edit
   def edit
-      redirect_to questions_url, notice: "You can not edit this answer" unless @user.id == @answer.user.id
+    respond_to do |format|
+      format.html
+    end
   end
 
+  # PATCH/PUT /answers/1
   def update
     @answer.update(params.require(:post).permit(:body))
-    redirect_to question_url(@answer.question.id.to_s), notice: "Answer Updated Successfully!!"
+
+    respond_to do |format|
+      if @answer.update(answer_params)
+        format.html { redirect_to question_url(@answer.question), notice: "Answer Updated Successfully!!" }
+      else
+        format.html { redirect_to question_url(@answer.question), alert: "Unable to update answer!!!" }
+      end
+    end
   end
 
+  # DELETE /answers/1
   def destroy
-    q = Question.find(@answer.question.id)
-    @answer.destroy
+    @question = Question.find(@answer.question.id)
+
+    @answers = @question.answers
+
     respond_to do |format|
-      format.html { redirect_to question_url(q.id), notice: "Answer added successfully!!" }      
-      format.js { @answers = q.answers }
-      format.json { render json: @answers}
+      if @answer.destroy
+        format.html { redirect_to question_url(@question), notice: "Answer deleted successfully!!" }      
+        format.js { @answers = @question.answers }
+      else
+        format.html { redirect_to question_url(@question), alert: "Unable to delete answer" }
+        format.js { @error = "Unable to delete answer" }
+      end
     end
   end
 
   private
 
-  def set_answer
-    @answer = Answer.find(params[:id])
+  def answer_params
+    params.require(:post).permit(:body)
   end
 
 end

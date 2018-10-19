@@ -1,3 +1,6 @@
+<% content_for :sidebar_tag_home do %>
+  active
+<% end %>
 <div class="container">
 	<div class="question-panel">
 		<h5 class="question-title"> <%= @question.title %></h5>
@@ -26,9 +29,7 @@
 		<% end %>
 		<br>
 		<p class="pull-left tags-list">
-			<% @question.tags.each do |tag| %>
-				<%= link_to "#{tag.name}", '#' %> 
-			<% end %>
+			<%= render @question.tags %>
 		</p>
 		<div class="posted-by pull-right">
 			<span>Asked on: <%= @question.created_at.strftime("%b %-d`%y at %H:%M") %></span>
@@ -38,10 +39,10 @@
 		<br>
 		<div class="comments-panel">
 			<div id="comments">
-				<%= render(@question.comments) %>
+				<%= render @question.comments %>
 			</div>
 			<% if can? :create, Comment %>
-			<%= form_tag(comments_create_path, :class => "col-lg-8", :remote => true) do %>
+			<%= form_tag(comments_path, :class => "col-lg-8", :remote => true) do %>
 				<%= hidden_field_tag :question_id, @question.id %>
 				<div class="form-group">
 					<%= label_tag :body, "Your Comment" %><br>
@@ -64,11 +65,11 @@
 		<p>Know someone who can answer? Share a link to this question via gmail, Google+, Twitter, or Facebook.</p>
 
 		<% if can? :create, Answer %>
-			<%= form_tag(post_answer_path, :class => "col-lg-10", :remote => true) do %>
+			<%= form_tag(answers_path, :class => "col-lg-10", :remote => true) do %>
 				<%= hidden_field_tag :question_id, @question.id %>
 				<div class="form-group">
 					<%= label_tag :body, "Your Answer" %><br>
-	    			<%= text_area_tag(:body, "", :class => "form-control answer-area", :rows => 6, :required => "yes") %>
+	    			<%= text_area_tag :body, "", :class => "form-control answer-area", :rows => 6, :required => "yes" %>
 				</div>
 				<div class="form-group">
 					<%= submit_tag("Post Your Answer", :class => "btn btn-primary btn-sm pull-left") %>

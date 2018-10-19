@@ -3,5 +3,5 @@ class Tag < ActiveRecord::Base
 	has_many :questions, through: :question_tags
 
 	validates :name, presence: true, uniqueness: true
-  	validates :description, presence: true
+  validates :description, presence: true
 end

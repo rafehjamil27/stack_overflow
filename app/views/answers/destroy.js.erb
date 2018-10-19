@@ -1,2 +1,6 @@
-$(".answers-panel").html("<%= escape_javascript render(@answers) %>")
-$('.answer-area').val("")
+$(".answers-panel").html("<%= escape_javascript render(@answers) %>");
+$('.answer-area').val("");
+$('.answer-count').html("<%= escape_javascript pluralize(@question.answers.count, "Answer")%>");
+<% if @error %>
+  alert(<%= @error %>);
+<% end %>

@@ -1,3 +1,7 @@
+<% content_for :sidebar_tag_home do %>
+  active
+<% end %>
+
 <div class="container">
   <% if user_signed_in? %>
     <%= link_to 'Ask Question', new_question_path, :class => "btn btn-primary pull-right", :method => :get %>
@@ -18,7 +22,7 @@
     <%= sortable "title", 'Title', params[:filter], params[:search_txt] %>
     <%= sortable "answer_count", '# of Answers', params[:filter], params[:search_txt] %>
   </div>
-  <p class="pull-right" style="padding-top: 10px;">Sort By: </p>
+  <p class="pull-right" style="padding-top: 10px; margin-right: 10px;">Sort By: </p>
   <table class="table questions-table col-lg-12">
     <thead>
       <%= will_paginate @questions, :class => 'my_pagination' %>
@@ -27,7 +31,6 @@
         <th style="width: 75%"></th>
       </tr>
     </thead>
-
     <tbody>
       <%= render @questions %>
     </tbody>

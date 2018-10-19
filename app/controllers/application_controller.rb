@@ -1,34 +1,19 @@
 class ApplicationController < ActionController::Base
-	# before_action :authorize
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
-	before_action :configure_permitted_parameters, if: :devise_controller?
-	# after_filter :store_action
-  
-	# def store_action
-	# 	return unless request.get? 
-	# 	if (request.path != "/users/sign_in" &&
-	# 	    request.path != "/users/sign_up" &&
-	# 	    request.path != "/users/password/new" &&
-	# 	    request.path != "/users/password/edit" &&
-	# 	    request.path != "/users/confirmation" &&
-	# 	    request.path != "/users/sign_out" &&
-	# 	    !request.xhr?) # don't store ajax calls
-	# 	  store_location_for(:user, request.fullpath)
-	# 	end
-	# end
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  load_and_authorize_resource
 
 	rescue_from CanCan::AccessDenied do |exception|
-
-		case exception.action
-		when :show
-			redirect_to users_url, :alert => exception.message
-		else
-			redirect_to root_url, :alert => exception.message
-		end
-		
-	end
+		redirect_to root_url, :alert => exception.message
+  end
+  
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    respond_to do |format|
+      format.html { redirect_to root_url, :alert => 'Resource doesn\'t exist' }
+    end
+  end
 
 protected
 	
@@ -39,9 +24,4 @@ protected
 		end
 	end 
 
-	def authorize
-		unless User.find_by(id: session[:user_id])
-			redirect_to login_url, notice: "Please log in"
-		end
-	end
 end

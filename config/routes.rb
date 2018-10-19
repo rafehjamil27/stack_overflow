@@ -1,44 +1,17 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
-  get 'question_tags/new'
 
-  get 'question_tags/create'
+  resources :answers, only: [:create, :destroy, :edit, :update]
 
-  get 'question_tags/destroy'
-
-  get 'tags/new'
-
-  get 'tags/create'
-
-  get 'tags/destroy'
+  resources :comments, only: [:create, :destroy, :edit, :update]
 
   resources :questions
 
-  resources :users
-
-  post 'users/:id/toggle_active' => 'users#toggle_active'
-
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
-
-  controller :answers do
-    get 'post_answer' => :new
-    post 'post_answer' => :create
-    delete 'answers/:id/delete' => :destroy
-    get 'answers/:id/edit' => :edit
-    patch 'answers/:id/edit' => :update
-  end
-
-  controller :comments do
-    get 'comments/show' => :show
-    get 'comments/:id/edit' => :edit
-    patch 'comments/:id/edit' => :update
-    post 'comments/create' => :create
-    delete 'comments/:id/delete' => :destroy
+  resources :users do
+    member do
+      post 'toggle_active'
+    end
   end
 
   controller :votes do

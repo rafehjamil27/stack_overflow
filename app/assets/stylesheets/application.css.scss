@@ -78,11 +78,15 @@ header{
 }
 
 .sidebar{
+	min-height: 400px !important;
+	margin-top: 20px;
 	padding-top: 70px;
 	padding-right: 0px !important;
     border-right: #e4e6e8 solid 1px;
     font-size: 0.8em;
 	nav{
+		position: fixed;
+		width: 13.55%;
 		ul li{
 			list-style: none;
 			color: #848d95;
@@ -108,6 +112,9 @@ header{
 
 .main-content{
 	padding-top: 60px;
+	.alert{
+		margin-top: 30px;
+	}
 }
 
 .container-header{

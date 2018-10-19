@@ -1,21 +1,18 @@
 <div class="answer-body">
 	<div class="vote pull-left col-lg-1">
 		<% if user_signed_in? %>
-		<%= link_to raw('<i class="fas fa-caret-square-up"></i>'), "/votes/create?answer_id=#{answer.id}", :remote => true %>
-		
-		<% end %>
+      <%= link_to raw('<i class="fas fa-caret-square-up"></i>'), "/votes/create?answer_id=#{answer.id}", :remote => true %>
+    <% end %>
 		<br>
 		<span class="answer-vote-<%=answer.id%>"><%= answer.votes.to_a.sum {|vote| vote.count} %></span><br>
 		<% if user_signed_in? %>
-		<%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?answer_id=#{answer.id}", :method => :delete, :remote => true %>
+		  <%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?answer_id=#{answer.id}", :method => :delete, :remote => true %>
 		<% end %>
 	</div>
 	<p><%=answer.body%></p>
 	<% if current_user %>
-		<% if can? :update, answer  %>
-			<%= link_to 'Delete', "/answers/#{answer.id}/delete", :method => :delete,:class => "pull-right", :style => "margin-left: 10px;", :remote => true %>
-		<% end %>
-		<% if can? :delete, answer  %>
+		<% if can? :manage, answer %>
+			<%= link_to 'Delete', "/answers/#{answer.id}", :method => :delete, :class => "pull-right", :style => "margin-left: 10px;", :remote => true %>
 			<%= link_to 'Edit', "/answers/#{answer.id}/edit", :class => "pull-right" %>
 		<% end %>
 	<% end %>
@@ -31,7 +28,7 @@
 			<%= render(answer.comments) %>
 		</div>
 		<% if can? :create, Comment %>
-		<%= form_tag(comments_create_path, :class => "col-lg-8", :remote => true) do %>
+		<%= form_tag(comments_path, :class => "col-lg-8", :remote => true) do %>
 			<%= hidden_field_tag :answer_id, answer.id %>
 			<div class="form-group">
 				<%= label_tag :body, "Your Comment" %><br>

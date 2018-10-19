@@ -1,45 +1,28 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_active]
   before_action :authenticate_user!
-  before_action :set_sidebar_tag, only: [:show, :edit, :update, :destroy, :toggle_active]
-  before_action :set_admin_sidebar_tag, only: [:index]
+  
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-    authorize! :index, @users, :message => "Access Denied!"
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    authorize! :show, @user, :message => "Can not access this user!"
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /users/1/edit
   def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(user_params)
-
     respond_to do |format|
-      if @user.save
-        @user.authenticate(user_params[:password])
-        session[:user_id] = @user.id
-        format.html { redirect_to questions_url, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      format.html
     end
   end
 
@@ -49,7 +32,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -58,44 +40,34 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
-    @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+      if @user.destroy
+        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      else
+        format.html { redirect_to users_url @user, notice: 'Unable to delete user.' }
+      end
     end
   end
 
+  # POST /user/1/toggle_active
   def toggle_active
-    if @user.is_admin?
-      redirect_to users_url, notice: "Can not deactivate Admin user"
-      return
-    end
-    if @user.is_active? then @user.update(:is_active => "0") 
-    else @user.update(:is_active => true) end
+    @users = User.all
+
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User de-activated' }
-      format.json { render json: @users = User.all }
+      if @user.toggle_active_status || @user.is_admin?
+        format.html { redirect_to users_url, notice: 'User de-activated' }
+        format.js
+      else
+        format.html { redirect_to users_url, notice: 'Unable to change user status' }
+        format.js { @error = 'Unable to change status' }
+      end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
-    end
-
-    def set_sidebar_tag
-      @user_tag = "active"
-    end
-
-    def set_admin_sidebar_tag
-      @admin_user_tag = "active"
     end
 end

@@ -16,23 +16,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-$(document).on('change', '.admin-checkbox', function(){
-	if($(this).prop("checked") == true){
-		console.log("true");
-	}
-	else{
-		console.log("false");
-	}
-	$.ajax({
-		type: "POST",
-		url: "/users/" + $(this).attr("data-user-id") + "/toggle_active",
-		dataType: 'json',
-		success: function(result, textStatus, xhr){
-			console.log("checking");
-		},
-		error: function(xhr, textStaus, errorThrown){
-			console.log(xhr);
-			console.log(errorThrown);
-		}
-	});
-});

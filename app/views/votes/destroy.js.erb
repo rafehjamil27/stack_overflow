@@ -1,1 +1,1 @@
-$(".<%=@multi_object['select_id']%>").html("<%= @multi_object['obj'].votes.to_a.sum {|vote| vote.count}%>")
+$(".<%= @select_id %>").html("<%= @resource.votes.to_a.sum {|vote| vote.count}%>")

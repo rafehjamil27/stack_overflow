@@ -1,52 +1,61 @@
 class CommentsController < ApplicationController
-  include CurrentUser
-  before_action :set_user, only: [:create]
-  before_action :set_comment, only: [:update, :edit, :destroy]
-
-  def show
-  end
-
+  # GET /comments/1/edit
   def edit
+    respond_to do |format|
+      format.html
+    end
   end
 
+  # PATCH/PUT /comments/1
   def update
-  	@comment.update(params.require(:post).permit(:body))
-    redirect_to question_url(@comment.question.id.to_s), notice: "Comment Updated Successfully!!" if @comment.question
-    redirect_to question_url(@comment.answer.question.id.to_s), notice: "Comment Updated Successfully!!" if @comment.answer
+    question = @comment.question ? @comment.question : @comment.answer.question
+
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to question_url(question), notice: "Comment Updated Successfully!!" }
+      else
+        format.html { redirect_to question_url(question), alert: "Unable to update comment!!" }
+      end
+    end
   end
 
+  # POST /comments
   def create
-    ob = Question.find(params[:question_id]) if params[:question_id]
-  	ob = Answer.find(params[:answer_id]) if params[:answer_id]
-  	ob.comments.create(:user => @user, :body => params[:body])
+    resource = params[:question_id] ? Question.find(params[:question_id]) : Answer.find(params[:answer_id])
   
     @comment_id = "comments"
-    @comment_id += "-#{ob.id}" if params[:answer_id]
+    @comment_id += "-#{resource.id}" if params[:answer_id]
+
+    question = params[:question_id] ? resource.id : resource.question_id
+    @comments = resource.comments
 
     respond_to do |format|
-      format.html { redirect_to question_url(ob.id), notice: "Comment added successfully!!!" } if params[:question_id]      
-      format.html { redirect_to question_url(ob.question_id), notice: "Comment added successfully!!!" } if params[:answer_id]
-      format.js { @comments = ob.comments }
-      format.json { render json: @comment_id }
+      if resource.comments.create(:user => current_user, :body => params[:body])
+        format.html { redirect_to question_url(question), notice: "Comment added successfully!!!" }      
+        format.js
+      else
+        format.html { redirect_to question_url(question), alert: "Unable to add comment!!!" }      
+        format.js { @error = "Unable to add comment" }
+      end
     end
-    # redirect_to question_url(5), notice: "#{params}"
   end
 
+  # DELETE /comments/1
   def destroy
-    q_id = @comment.question.id if @comment.question
-    q_id = @comment.answer.question.id if @comment.answer
-    @comment.destroy
+    question = @comment.question ? @comment.question : @comment.answer.question 
+    
     respond_to do |format|
-      format.html {redirect_to question_url(q_id), notice: "Comment deleted successfully!!!"}
-      format.js 
-      format.json { render json: q_id }
+      if @comment.destroy
+        format.html {redirect_to question_url(question), notice: "Comment deleted successfully!!!"} 
+      else
+        format.html {redirect_to question_url(question), alert: "Unable to delete comment"}
+      end
     end
   end
 
   private
 
-  def set_comment
-  	@comment = Comment.find(params[:id])
+  def comment_params
+    params.require(:comment).permit(:body)
   end
-
 end
