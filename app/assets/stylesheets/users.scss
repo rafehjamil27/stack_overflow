@@ -6,82 +6,82 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container-body {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	width: 100%;
-	text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 100%;
+  text-align: center;
 
-	.login-form{
-		margin-top: 50px;
-		text-align: left;
-		border: #e4e6e8 solid 1px;
-    	padding: 40px 50px 20px 50px;
-    	font-size: 0.8em;
+  .login-form{
+    margin-top: 50px;
+    text-align: left;
+    border: #e4e6e8 solid 1px;
+      padding: 40px 50px 20px 50px;
+      font-size: 0.8em;
 
-    	.social-btns{
-    		padding-bottom: 30px;
-    		margin-bottom: 30px;
-    		border-bottom: #e4e6e8 solid 1px;
-    	}
+      .social-btns{
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        border-bottom: #e4e6e8 solid 1px;
+      }
 
-    	.btn-google{
-    		color: black;
-    		border-color: lightgrey;
-    	}
+      .btn-google{
+        color: black;
+        border-color: lightgrey;
+      }
 
-    	.btn-facebook{
-    		color: white;
-    		border-color: #395697;
-    		background-color: #395697;
-    	}
+      .btn-facebook{
+        color: white;
+        border-color: #395697;
+        background-color: #395697;
+      }
 
-    	label{
-    		font-weight: bolder;
-    	}
+      label{
+        font-weight: bolder;
+      }
 
-    	input{
-    		border-radius: 0px;
-    		margin-top: -10px;
-    		border-color: #e4e6e8;
-    	}
+      input{
+        border-radius: 0px;
+        margin-top: -10px;
+        border-color: #e4e6e8;
+      }
 
-		.btn{
-			border-radius: 3px;
-			font-size: 0.9em;
-			margin-top: 20px;
-			float: right;
-		}
+    .btn{
+      border-radius: 3px;
+      font-size: 0.9em;
+      margin-top: 20px;
+      float: right;
+    }
 
-		.help-text{
-			text-align: center;
-			span{
-				color: #07C;
-			}
-		}
-		.policy{
-			margin-top: 70px;
-			width: 100%;
-			font-size: 0.65em;
-			text-align: center;
-			color: #6a737c;
-			span{
-				color: #07C;
-			}
-		}
-		p{
-			font-size: 0.9em;
-			line-height: 0.3em;
-		}
-	}
-	h5{
-		font-size: 1.2em;
-	}
-	.exchange-txt{
-		color: darkblue;
-	}
+    .help-text{
+      text-align: center;
+      span{
+        color: #07C;
+      }
+    }
+    .policy{
+      margin-top: 70px;
+      width: 100%;
+      font-size: 0.65em;
+      text-align: center;
+      color: #6a737c;
+      span{
+        color: #07C;
+      }
+    }
+    p{
+      font-size: 0.9em;
+      line-height: 0.3em;
+    }
+  }
+  h5{
+    font-size: 1.2em;
+  }
+  .exchange-txt{
+    color: darkblue;
+  }
 }
 .user-img{
-	margin-right: 20px;
+  margin-right: 20px;
 }
 /*slider switch style*/
 .switch {

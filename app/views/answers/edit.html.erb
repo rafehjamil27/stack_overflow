@@ -2,13 +2,13 @@
   active
 <% end %>
 <div class="container">
-	<%= form_for @answer, as: :post, url: "/answers/#{@answer.id}", method: :patch do |f| %>
-		<div class="form-group">
-			<%= f.label :body, "Your Answer" %><br>
-			<%= f.text_area(:body, class: "form-control", rows: 6, required: "yes") %>
-		</div>
-		<div class="form-group">
-			<%= submit_tag("Update Your Answer", class: "btn btn-primary btn-sm pull-left") %>
-		</div>
-	<% end %>	
+  <%= form_for @answer, as: :post, url: "/answers/#{@answer.id}", method: :patch do |f| %>
+    <div class="form-group">
+      <%= f.label :body, "Your Answer" %><br>
+      <%= f.text_area(:body, class: "form-control", rows: 6, required: "yes") %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag("Update Your Answer", class: "btn btn-primary btn-sm pull-left") %>
+    </div>
+  <% end %>	
 </div>

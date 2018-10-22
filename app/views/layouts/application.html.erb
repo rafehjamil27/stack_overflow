@@ -8,29 +8,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body class='<%= controller.controller_name %>'>
-	<header>
-		<!-- top navigational bar -->
-		<%= render "shared/topbar" %>
-	</header>
+  <header>
+    <!-- top navigational bar -->
+    <%= render "shared/topbar" %>
+  </header>
 
-	<div class="banner container-fluid" style="display: none !important">
-		<%= render "shared/banner" %>
-	</div>
+  <div class="banner container-fluid" style="display: none !important">
+    <%= render "shared/banner" %>
+  </div>
 
-	<div class="page-content row">
-		<!-- side navigational bar -->
-		<%= render "shared/sidebar" %>
+  <div class="page-content row">
+    <!-- side navigational bar -->
+    <%= render "shared/sidebar" %>
 
-		<div class="main-content col-lg-10">
-			<!-- page alerts and flash messages -->
-			<%= render "shared/alerts" %>
+    <div class="main-content col-lg-10">
+      <!-- page alerts and flash messages -->
+      <%= render "shared/alerts" %>
 
-			<%= yield %>
-		</div>
-	</div>
+      <%= yield %>
+    </div>
+  </div>
 
-	<div class="footer">
-		<%= render "shared/footer" %>	
-	</div>
+  <div class="footer">
+    <%= render "shared/footer" %>	
+  </div>
 </body>
 </html>

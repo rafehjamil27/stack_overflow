@@ -1,10 +1,10 @@
 <div class="comment-body">
-	<p><%=comment.body%> - <span class="comment-user"><%= comment.user.name %></span> <span class="comment-time"><%= comment.created_at.strftime("%b %-d`%y at %H:%M") %></span></p>
-	<% if can? :manage, comment %>
-		<%= link_to 'Edit', edit_comment_path(comment), class: "pull-left" %>
-		<%= link_to 'Delete', comment, method: :delete, class: "pull-left", style: "margin-left: 10px;" %>
-	<% end %>
-	<br>
-	<br>	
-	<%= @current_item %>
+  <p><%=comment.body%> - <span class="comment-user"><%= comment.user.name %></span> <span class="comment-time"><%= comment.created_at.strftime("%b %-d`%y at %H:%M") %></span></p>
+  <% if can? :manage, comment %>
+    <%= link_to 'Edit', edit_comment_path(comment), class: "pull-left" %>
+    <%= link_to 'Delete', comment, method: :delete, class: "pull-left", style: "margin-left: 10px;" %>
+  <% end %>
+  <br>
+  <br>	
+  <%= @current_item %>
 </div>
