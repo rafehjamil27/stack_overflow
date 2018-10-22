@@ -12,7 +12,7 @@
 				<br>
 				<span class="question-vote-<%=@question.id%>"><%=@question.votes.to_a.sum {|vote| vote.count}%></span><br>
 				<% if user_signed_in? %>
-				<%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?question_id=#{@question.id}", :remote => true, :method => :delete %>
+				<%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?question_id=#{@question.id}", remote: true, method: :delete %>
 				<% end %>
 			</div>
 			<div class="col-lg-11">
@@ -22,10 +22,10 @@
 			</div>
 		</div>
 		<% if can? :delete, @question %>
-			<%= link_to 'Delete', "/questions/#{@question.id}", :class => "pull-right", :method => :delete %>
+			<%= link_to 'Delete', "/questions/#{@question.id}", class: "pull-right", method: :delete %>
 		<% end %>
 		<% if can? :update, @question %>
-			<%= link_to 'Edit', edit_question_path(@question), :class => "pull-right", :style => "margin-right: 10px;" %>
+			<%= link_to 'Edit', edit_question_path(@question), class: "pull-right", style: "margin-right: 10px;" %>
 		<% end %>
 		<br>
 		<p class="pull-left tags-list">
@@ -42,14 +42,14 @@
 				<%= render @question.comments %>
 			</div>
 			<% if can? :create, Comment %>
-			<%= form_tag(comments_path, :class => "col-lg-8", :remote => true) do %>
+			<%= form_tag(comments_path, class: "col-lg-8", remote: true) do %>
 				<%= hidden_field_tag :question_id, @question.id %>
 				<div class="form-group">
 					<%= label_tag :body, "Your Comment" %><br>
-	    			<%= text_area_tag(:body, "", :id => "question_comment",:class => "form-control comment-area", :rows => 2, :required => "yes") %>
+	    			<%= text_area_tag(:body, "", id: "question_comment", class: "form-control comment-area", rows: 2, required: "yes") %>
 				</div>
 				<div class="form-group">
-				<%= submit_tag("Post Your Comment", :class => "btn btn-primary btn-sm pull-right") %>
+				<%= submit_tag("Post Your Comment", class: "btn btn-primary btn-sm pull-right") %>
 			</div>
 			<% end %>
 			<% end %>
@@ -65,14 +65,14 @@
 		<p>Know someone who can answer? Share a link to this question via gmail, Google+, Twitter, or Facebook.</p>
 
 		<% if can? :create, Answer %>
-			<%= form_tag(answers_path, :class => "col-lg-10", :remote => true) do %>
+			<%= form_tag(answers_path, class: "col-lg-10", remote: true) do %>
 				<%= hidden_field_tag :question_id, @question.id %>
 				<div class="form-group">
 					<%= label_tag :body, "Your Answer" %><br>
-	    			<%= text_area_tag :body, "", :class => "form-control answer-area", :rows => 6, :required => "yes" %>
+	    			<%= text_area_tag :body, "", class: "form-control answer-area", rows: 6, required: "yes" %>
 				</div>
 				<div class="form-group">
-					<%= submit_tag("Post Your Answer", :class => "btn btn-primary btn-sm pull-left") %>
+					<%= submit_tag("Post Your Answer", class: "btn btn-primary btn-sm pull-left") %>
 				</div>
 			<% end %>
 		<% end %>

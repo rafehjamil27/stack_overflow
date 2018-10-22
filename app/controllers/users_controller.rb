@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  
+  load_and_authorize_resource
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
 
@@ -11,8 +10,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def new 
+
+  end
+
   # GET /users/1
-  # GET /users/1.json
   def show
     respond_to do |format|
       format.html
@@ -27,7 +29,6 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)

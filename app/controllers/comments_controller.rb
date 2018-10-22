@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   # GET /comments/1/edit
   def edit
     respond_to do |format|

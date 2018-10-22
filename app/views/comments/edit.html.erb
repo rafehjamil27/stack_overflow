@@ -2,10 +2,10 @@
 	<%= form_for @comment, method: :patch do |f| %>
 		<div class="form-group">
 			<%= f.label :body, "Your Comment" %><br>
-			<%= f.text_area(:body, :class => "form-control", :rows => 6, :required => "yes") %>
+			<%= f.text_area(:body, class: "form-control", rows: 6, required: "yes") %>
 		</div>
 		<div class="form-group">
-			<%= submit_tag("Update Your Comment", :class => "btn btn-primary btn-sm pull-left") %>
+			<%= submit_tag("Update Your Comment", class: "btn btn-primary btn-sm pull-left") %>
 		</div>
 	<% end %>	
 </div>

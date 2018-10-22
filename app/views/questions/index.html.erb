@@ -9,12 +9,12 @@
   <h4><%= @title %> </h4>
   <br>
   <div class="btn-group pull-right table-filters" role="group" aria-label="Button Filters">
-    <a type="button" href="<%= questions_path(:filter => "answered", :sort => params[:sort], :direction => params[:direction]) %>" class="btn btn-outline-secondary <%= @answered %>">Answered</a>
-    <a type="button" href="<%= questions_path(:filter => "un_answered", :sort => params[:sort], :direction => params[:direction]) %>" class="btn btn-outline-secondary <%= @un_answered %>">Unanswered</a>
+    <a type="button" href="<%= questions_path(filter: "answered", sort: params[:sort], direction: params[:direction]) %>" class="btn btn-outline-secondary <%= @answered %>">Answered</a>
+    <a type="button" href="<%= questions_path(filter: "un_answered", sort: params[:sort], direction: params[:direction]) %>" class="btn btn-outline-secondary <%= @un_answered %>">Unanswered</a>
     <% if user_signed_in? %>
-      <a type="button" href="<%= questions_path(:filter => "answered_by_me", :sort => params[:sort], :direction => params[:direction]) %>"  class="btn btn-outline-secondary <%= @by_me %>">Asked By Me</a>
+      <a type="button" href="<%= questions_path(filter: "answered_by_me", sort: params[:sort], direction: params[:direction]) %>"  class="btn btn-outline-secondary <%= @by_me %>">Asked By Me</a>
     <% end %>
-    <a type="button" href="<%= questions_path(:filter => "none", :sort => params[:sort], :direction => params[:direction])%>" class="btn btn-outline-secondary <%= @top_q %>">Top Questions</a>
+    <a type="button" href="<%= questions_path(filter: "none", sort: params[:sort], direction: params[:direction])%>" class="btn btn-outline-secondary <%= @top_q %>">Top Questions</a>
   </div>
   <br><br>
    <div class="btn-group pull-right table-sorting" role="group" aria-label="Button Filters">

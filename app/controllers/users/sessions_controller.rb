@@ -5,7 +5,8 @@ class Users::SessionsController < Devise::SessionsController
 
     if @user
       unless @user.is_active?
-        redirect_to new_user_session_path, alert: "Your account is inactive!" && return
+        redirect_to new_user_session_path, alert: "Your account is inactive!" 
+        return
       end
     end
 

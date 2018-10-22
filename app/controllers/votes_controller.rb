@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  load_and_authorize_resource
   # POST /votes
   def create
     @resource, @select_id, question = Vote.increment_vote(params, current_user) 

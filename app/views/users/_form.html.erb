@@ -16,26 +16,26 @@
 
   <div class="form-group">
     <%= f.label(:name, 'Display Name' )%><br>
-    <%= f.text_field(:name, :class => "form-control form-control-sm", :placeholder => "J. Doe") %>
+    <%= f.text_field(:name, class: "form-control form-control-sm", placeholder: "J. Doe") %>
   </div>
   <div class="form-group">
     <%= f.label(:email, "Email (required, but never shown)") %><br>
-    <%= f.text_field(:email, :class => "form-control form-control-sm", :placeholder => "you@example.com") %>
+    <%= f.text_field(:email, class: "form-control form-control-sm", placeholder: "you@example.com") %>
   </div>
   <div class="form-group">
     <%= f.label :password %><br>
-    <%= f.password_field(:password, :class => "form-control form-control-sm", :placeholder => "******") %>
+    <%= f.password_field(:password, class: "form-control form-control-sm", placeholder: "******") %>
   </div>
   <div class="form-group">
     <%= f.label :password_confirmation %><br>
-    <%= f.password_field(:password_confirmation, :class => "form-control form-control-sm", :placeholder => "*****") %>
+    <%= f.password_field(:password_confirmation, class: "form-control form-control-sm", placeholder: "*****") %>
   </div>
   <div class="form-group">
     <%= f.label :avatar %><br>
-    <%= f.file_field :avatar, :required => true %>
+    <%= f.file_field :avatar, required: true %>
   </div>
   <div class="form-group">
-    <%= f.submit("Sign Up", :class => "btn btn-primary btn-lg pull-right form-control") %>
+    <%= f.submit("Sign Up", class: "btn btn-primary btn-lg pull-right form-control") %>
   </div><br>
   <div class="policy form-group">By clicking "Sign up", you acknowledge that you have read our updated <span>terms of service, privacy policy </span>and <span>cookie policy</span>, and that your continued use of the website is subject to these policies.</div>
 <% end %>

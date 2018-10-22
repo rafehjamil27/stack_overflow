@@ -25,17 +25,17 @@
 					<p><%= current_user.name %></p>
 				</li>
 				<li style="margin-top: 10px;">
-					<%= image_tag current_user.avatar.url(:thumb), :class => "pull-left", :style => "margin-right: 20px;" %>
+					<%= image_tag current_user.avatar.url(:thumb), class: "pull-left", style: "margin-right: 20px;" %>
 				</li>
 				<li class="nav-item" style="margin-top: 10px;">
-				<%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-sm btn-primary')%>
+				<%= button_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-primary')%>
 				</li>
 			<% else %>
 				<li class="nav-item">
 					<a href="<%= new_user_session_path %>">Log In</a>
 				</li>
 				<li class="nav-item">
-					<%= button_to('Sign up', new_user_registration_path, method: :get, :class => 'btn btn-sm btn-primary')%>
+					<%= button_to('Sign up', new_user_registration_path, method: :get, class: 'btn btn-sm btn-primary')%>
 				</li>
 			<% end %>
 		</ul>

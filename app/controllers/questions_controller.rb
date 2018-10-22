@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  
+  load_and_authorize_resource
+  skip_load_resource only: :create
   # GET /questions
   def index
     @questions, @title = Question.apply_filters(params, sort_column, sort_direction, current_user)
@@ -75,7 +76,7 @@ class QuestionsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :body)
+      params.require(:question).permit(:title, :body, :tag_names)
     end
 
     def sort_column

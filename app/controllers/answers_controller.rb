@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  load_and_authorize_resource
   # POST /answers
   def create
     @question = Question.find(params[:question_id])

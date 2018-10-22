@@ -16,17 +16,17 @@
 
   <div class="form-group col-lg-10">
     <%= f.label :title %><br>
-    <%= f.text_field :title, :class => "form-control", placeholder: "What's your programming question? Be specific." %>
+    <%= f.text_field :title, class: "form-control", placeholder: "What's your programming question? Be specific." %>
   </div>
   <div class="form-group col-lg-10">
     <%= f.label :body %><br>
-    <%= f.text_area :body, :class => "form-control", :rows => 6, :required => "yes" %>
+    <%= f.text_area :body, class: "form-control", rows: 6, required: "yes" %>
   </div>
   <div class="form-group col-lg-10">
     <%= f.label :tag_names, 'Tags' %> <br>
     <%= f.collection_select(:tag_names, Tag.all, :id, :name, {}, { class: "form-control", multiple: "true"})%>   
   </div>
   <div class="form-group col-lg-10">
-    <%= f.submit "Post Your Question", :class => "btn btn-primary" %>
+    <%= f.submit "Post Your Question", class: "btn btn-primary" %>
   </div>
 <% end %>

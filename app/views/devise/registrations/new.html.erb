@@ -8,7 +8,7 @@
         <p><a href="<%= new_user_session_path %>">Log in</a> </p>
       </div>
       <div class="tab-button active">
-        <p><a href="<%=new_user_registration_path %>">Sign up</a></p>
+        <p><a href="<%= new_user_registration_path %>">Sign up</a></p>
       </div>
     </div>
   </div>
@@ -33,29 +33,29 @@
 
           <div class="form-group">
             <%= f.label(:name, 'Display Name' )%><br>
-            <%= f.text_field(:name, :class => "form-control form-control-sm", :placeholder => "J. Doe", autofocus: true) %>
+            <%= f.text_field(:name, class: "form-control form-control-sm", placeholder: "J. Doe", autofocus: true) %>
           </div>
           <div class="form-group">
             <%= f.label(:email, "Email (required, but never shown)") %><br>
-            <%= f.text_field(:email, :class => "form-control form-control-sm", :placeholder => "you@example.com") %>
+            <%= f.text_field(:email, class: "form-control form-control-sm", placeholder: "you@example.com") %>
           </div>
           <div class="form-group">
             <%= f.label :password %><br>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br /><br>
-            <%= f.password_field(:password, :class => "form-control form-control-sm", :placeholder => "******") %>
+            <%= f.password_field(:password, class: "form-control form-control-sm", placeholder: "******") %>
           </div>
           <div class="form-group">
             <%= f.label :password_confirmation %><br>
-            <%= f.password_field(:password_confirmation, :class => "form-control form-control-sm", :placeholder => "*****") %>
+            <%= f.password_field(:password_confirmation, class: "form-control form-control-sm", placeholder: "*****") %>
           </div>
           <div class="form-group">
             <%= f.label :avatar %><br>
             <%= f.file_field :avatar %>
           </div>
           <div class="form-group">
-            <%= f.submit("Sign Up", :class => "btn btn-primary btn-lg pull-right form-control") %>
+            <%= f.submit("Sign Up", class: "btn btn-primary btn-lg pull-right form-control") %>
           </div><br>
           <div class="policy form-group">By clicking "Sign up", you acknowledge that you have read our updated <span>terms of service, privacy policy </span>and <span>cookie policy</span>, and that your continued use of the website is subject to these policies.</div>
         <% end %>
@@ -63,7 +63,7 @@
     </div>
     <div class="row center-block justify-content-center align-items-center">
       <div class="col-lg-5 login-form">
-        <p class="help-text">Already have an account? <a href="<%= login_path %>">Log in</a></p>
+        <p class="help-text">Already have an account? <a href="<%= new_user_session_path %>">Log in</a></p>
         <p class="help-text">Are you an employer? <a href="#">Log in Talent</a></p>
       </div>
     </div>
