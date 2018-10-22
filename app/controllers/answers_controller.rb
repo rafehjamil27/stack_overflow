@@ -41,9 +41,10 @@ class AnswersController < ApplicationController
     @question = Question.find(@answer.question.id)
 
     @answers = @question.answers
+    @answer.destroy
 
     respond_to do |format|
-      if @answer.destroy
+      if @answer.destroyed?
         format.html { redirect_to question_url(@question), notice: "Answer deleted successfully!!" }      
         format.js { @answers = @question.answers }
       else

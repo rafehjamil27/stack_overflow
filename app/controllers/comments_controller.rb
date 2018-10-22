@@ -43,9 +43,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     question = @comment.question ? @comment.question : @comment.answer.question 
-    
+    @comment.destroy
     respond_to do |format|
-      if @comment.destroy
+      if @comment.destroyed?
         format.html {redirect_to question_url(question), notice: "Comment deleted successfully!!!"} 
       else
         format.html {redirect_to question_url(question), alert: "Unable to delete comment"}

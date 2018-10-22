@@ -41,8 +41,9 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user.destroy
     respond_to do |format|
-      if @user.destroy
+      if @user.destroyed?
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       else
         format.html { redirect_to users_url @user, notice: 'Unable to delete user.' }
