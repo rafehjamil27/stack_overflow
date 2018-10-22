@@ -21,6 +21,7 @@ class Ability
         can :read, Answer
         can :manage, Comment, :user_id => user.id
         can :read, Comment
+        can :manage, Vote
       end        
     else
       can :read, Question  
