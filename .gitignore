@@ -18,3 +18,8 @@
 
 # ignore user profile pics
 /public/system/avatars/*
+
+# ignore mail_catcher files
+/app/assets/images/MailCatcher_files/*
+/app/assets/images/MailCatcher.html
+/app/assets/images/rename.png
