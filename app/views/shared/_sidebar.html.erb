@@ -1,7 +1,7 @@
 <div class="sidebar col-lg-2 pull-left">
   <nav class="nav flex-column justify-content-end">
     <a class="nav-link <%= yield :sidebar_tag_home %>" href="<%= questions_path %>">Home</a>
-    <a class="nav-link" href="#"><i class="fas fa-globe-americas"></i>  Public</a>
+    <a class="nav-link <%= yield :sidebar_tag_questions %>" href="#"><i class="fas fa-globe-americas"></i>  Stack Overflow</a>
     <ul>
       <li><a class="nav-link" href="#"> Tags</a></li>
       <% if user_signed_in? %>
