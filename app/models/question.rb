@@ -26,21 +26,17 @@ class Question < ActiveRecord::Base
         @title = "Search Results"
         @search_txt = params[:search_txt]
         @questions = @questions.where("questions.title LIKE '%#{@search_txt}%' OR questions.body LIKE '%#{@search_txt}%' OR answers.body LIKE '%#{@search_txt}%'")
-      elsif params[:filter] == "answered_by_me"
+      elsif params[:filter] == "asked_by_me"
         @title = "Questions Asked By Me"
-        @by_me = "active"
         @questions = @questions.where("questions.user_id = #{current_user.id}")
       elsif params[:filter] == "answered"
         @title = "Answered Questions"
-        @answered = "active"
         @questions = @questions.where("answers.id IS NOT NULL")
       elsif params[:filter] == "un_answered"
-        @title = "Unanswered Questions"
-        @un_answered = "active"        
+        @title = "Unanswered Questions"      
         @questions = @questions.where("answers.id IS NULL")
       else
         @title = "Top Questions"
-        @top_q = "active"
       end
       
       # sorting

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :filtered
   load_and_authorize_resource
   skip_load_resource only: :create
   # GET /questions
@@ -88,5 +88,9 @@ class QuestionsController < ApplicationController
     
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def filtered
+      params[:filter] ? params[:filter] : "top_q"
     end
 end

@@ -9,12 +9,12 @@
   <h4><%= @title %> </h4>
   <br>
   <div class="btn-group pull-right table-filters" role="group" aria-label="Button Filters">
-    <a type="button" href="<%= questions_path(filter: "answered", sort: params[:sort], direction: params[:direction]) %>" class="btn btn-outline-secondary <%= @answered %>">Answered</a>
-    <a type="button" href="<%= questions_path(filter: "un_answered", sort: params[:sort], direction: params[:direction]) %>" class="btn btn-outline-secondary <%= @un_answered %>">Unanswered</a>
+    <%= filters "Answered", "answered", sort: params[:sort], direction: params[:direction] %>
+    <%= filters "Unanswered", "un_answered", sort: params[:sort], direction: params[:direction] %>
     <% if user_signed_in? %>
-      <a type="button" href="<%= questions_path(filter: "answered_by_me", sort: params[:sort], direction: params[:direction]) %>"  class="btn btn-outline-secondary <%= @by_me %>">Asked By Me</a>
+      <%= filters "Asked By Me", "asked_by_me", sort: params[:sort], direction: params[:direction] %>
     <% end %>
-    <a type="button" href="<%= questions_path(filter: "none", sort: params[:sort], direction: params[:direction])%>" class="btn btn-outline-secondary <%= @top_q %>">Top Questions</a>
+    <%= filters "Top Questions", "top_q", sort: params[:sort], direction: params[:direction] %>
   </div>
   <br><br>
    <div class="btn-group pull-right table-sorting" role="group" aria-label="Button Filters">
