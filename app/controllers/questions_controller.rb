@@ -51,8 +51,10 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.assign_attributes(question_params)
+    
     respond_to do |format|
-      if @question.update(question_params)
+      if @question.save
         @question.add_tags params["question"][:tag_names]
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
       else
@@ -64,6 +66,7 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   def destroy
     @question.destroy
+
     respond_to do |format|
       if @question.destroyed?
         format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }

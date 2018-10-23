@@ -30,8 +30,10 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    @user.assign_attributes(user_params)
+
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.save
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
       else
         format.html { render :edit }
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+
     respond_to do |format|
       if @user.destroyed?
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -57,7 +60,7 @@ class UsersController < ApplicationController
     @users = User.all
 
     respond_to do |format|
-      if @user.toggle_active_status || @user.is_admin?
+      if @user.toggle_active_status
         format.html { redirect_to users_url, notice: 'User de-activated' }
         format.js
       else

@@ -7,19 +7,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1
-  def update
-    question = @comment.question ? @comment.question : @comment.answer.question
-
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to question_url(question), notice: "Comment Updated Successfully!!" }
-      else
-        format.html { redirect_to question_url(question), alert: "Unable to update comment!!" }
-      end
-    end
-  end
-
   # POST /comments
   def create
     resource = params[:question_id] ? Question.find(params[:question_id]) : Answer.find(params[:answer_id])
@@ -30,8 +17,10 @@ class CommentsController < ApplicationController
     question = params[:question_id] ? resource.id : resource.question_id
     @comments = resource.comments
 
+    comment = resource.comments.build(user: current_user, body: params[:body])
+
     respond_to do |format|
-      if resource.comments.create(:user => current_user, :body => params[:body])
+      if comment.save
         format.html { redirect_to question_url(question), notice: "Comment added successfully!!!" }      
         format.js
       else
@@ -41,10 +30,27 @@ class CommentsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /comments/1
+  def update
+    question = @comment.question ? @comment.question : @comment.answer.question
+
+    @comment.assign_attributes(comment_params)
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to question_url(question), notice: "Comment Updated Successfully!!" }
+      else
+        format.html { redirect_to question_url(question), alert: "Unable to update comment!!" }
+      end
+    end
+  end
+
   # DELETE /comments/1
   def destroy
     question = @comment.question ? @comment.question : @comment.answer.question 
+    
     @comment.destroy
+
     respond_to do |format|
       if @comment.destroyed?
         format.html {redirect_to question_url(question), notice: "Comment deleted successfully!!!"} 

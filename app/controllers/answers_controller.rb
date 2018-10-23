@@ -5,9 +5,9 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
 
     @answers = @question.answers
-
+    answer = @question.answers.build(user: current_user, body: params[:body])
     respond_to do |format|
-      if @question.answers.create(:user => current_user, :body => params[:body])
+      if answer.save
         format.html { redirect_to question_url(@question), notice: "Answer added successfully!!" }      
         format.js { @answers = @question.answers }
       else
@@ -26,10 +26,10 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1
   def update
-    @answer.update(params.require(:post).permit(:body))
+    @answer.assign_attributes(answer_params)
 
     respond_to do |format|
-      if @answer.update(answer_params)
+      if @answer.save
         format.html { redirect_to question_url(@answer.question), notice: "Answer Updated Successfully!!" }
       else
         format.html { redirect_to question_url(@answer.question), alert: "Unable to update answer!!!" }

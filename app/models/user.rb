@@ -14,13 +14,15 @@ class User < ActiveRecord::Base
   # paper clip validations and defaults
   has_attached_file :avatar, 
   :styles => { medium: "150x 150>", thumb:"50x50>" }, 
-  :default_url => "/assets/rename.png",
+  :default_url => ":rails_root/assets/rename.png",
   :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
   :url => "/system/:attachment/:id/:style/:filename"
   
   validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
 
   def toggle_active_status
+    return nil if self.is_admin?
+    
     self.is_active ? self.update(:is_active => false) : self.update(:is_active => true)
   end
 

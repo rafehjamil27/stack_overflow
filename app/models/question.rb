@@ -15,7 +15,7 @@ class Question < ActiveRecord::Base
     def add_tags(tags)
       tags.each do |tag|
         current_question_tag = question_tags.find_by(tag_id: tag)
-        question_tags.create(:tag => Tag.find(tag)) unless tag == "" ||	current_question_tag
+        question_tags.create!(:tag => Tag.find(tag)) unless tag == "" ||	current_question_tag
       end
     end
     
@@ -45,6 +45,6 @@ class Question < ActiveRecord::Base
       
       # sorting
       @questions = @questions.order(sort_column + " " + sort_direction)
-      return @questions, @title
+      [@questions, @title]
     end
 end
