@@ -23,3 +23,6 @@
 /app/assets/images/MailCatcher_files/*
 /app/assets/images/MailCatcher.html
 /app/assets/images/rename.png
+
+# ignore byebug_history
+/.byebug_history
