@@ -17,7 +17,7 @@
 /tmp
 
 # ignore user profile pics
-/public/system/avatars/*
+/public/system/avatars
 
 # ignore mail_catcher files
 /app/assets/images/MailCatcher_files/*

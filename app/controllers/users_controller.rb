@@ -63,9 +63,11 @@ class UsersController < ApplicationController
       if @user.toggle_active_status
         format.html { redirect_to users_url, notice: 'User de-activated' }
         format.js
+        format.json { render json: @users }
       else
         format.html { redirect_to users_url, notice: 'Unable to change user status' }
         format.js { @error = 'Unable to change status' }
+        format.json { render json: @error = "Unable to change status" }
       end
     end
   end

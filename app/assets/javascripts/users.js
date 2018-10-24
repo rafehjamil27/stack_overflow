@@ -6,12 +6,11 @@ $(document).on('change', '.admin-checkbox', function(){
     type: "POST",
     url: "/users/" + $(this).attr("data-user-id") + "/toggle_active",
     dataType: 'json',
-    success: function(result, textStatus, xhr){
-      console.log("checking");
-    },
     error: function(xhr, textStaus, errorThrown){
+      alert("Unable to change user status");
       console.log(xhr);
       console.log(errorThrown);
+      location.reload();
     }
   });
 });
