@@ -1,0 +1,16 @@
+<tr>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td>
+    <label class="switch">
+      <%= raw active_checkbox user %>
+      <span class="slider round"></span>
+    </label>  
+  </td>
+  <td><%= user.is_admin %></td>
+  <td><%= link_to 'Show', user %></td>
+  <td><%= link_to 'Edit', edit_user_path(user) %></td>
+  <td><% unless user.is_admin? %>
+    <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %></td>
+</tr>

@@ -1,0 +1,157 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.container{
+  margin-top: 50px;
+}
+
+form{
+  label{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .form-control{
+    font-size: 0.75em !important;
+  }
+}
+
+.btn-group{
+  a{
+    color: grey;
+    background-color: white;
+  }
+  a.active{
+    color: black !important;
+    background-color: rgba(174, 192, 209, 1) !important;
+  }
+  a:visited{
+    color: grey;
+  }
+  a:hover{
+    color: white;
+  }	
+}
+
+table.questions-table{
+  thead{
+    th{
+      border-top: transparent;
+    }
+  }
+  tbody{
+    .votes{
+      margin-top: -15px;
+      text-align: center;
+      padding: 10px 8px;
+      .mini-counts{
+        font-size: 1.5em;
+      }
+      div{
+        font-size: 0.71em;
+        margin-top: -10px;
+        color: grey;
+      }
+    }
+    .votes.active{
+      border: lightgreen solid 1px;
+    }
+    tr td{
+       span{
+        color: grey;
+        font-size: 0.6em;
+      }
+      .tags-list{
+        a{
+          font-size: 1em !important;
+        }
+      }
+    }
+  }
+}
+
+.tags-list{
+  margin-top: 10px; 
+  a{
+    font-size: 0.6em;
+    margin-right: 10px;
+    padding: 5px;
+    color: #39739d;
+    background-color: #e1ecf4;
+    border-color: #e1ecf4;
+    border-radius: 5px;
+    border-style: solid;
+  }
+}
+
+.posted-by{
+  padding: 5px;
+  color: #39739d;
+  background-color: #e1ecf4;
+  border-color: #e1ecf4;
+  border-radius: 5px;
+  border-style: solid;
+  text-align: center;
+  span{
+    font-size: 0.7em;
+    color: grey;
+  }
+  p{
+      font-size: 0.7em;
+      padding-top: 15px;
+      padding-right: 10px;
+      padding-left: 10px;
+  }
+}
+
+.question-title{
+  padding-bottom: 15px;
+  border-bottom: #e1ecf4 solid 2px;
+}
+.question-body{
+  font-size: 0.8em;
+  text-align: justify-all;
+}
+.question-panel{
+  border-bottom: #e1ecf4 solid 2px;
+  .answer-count{
+    margin-top: 50px;
+  }
+}
+.vote{
+  text-align: center;
+  color: grey;
+  a{
+    color: grey;
+    font-size: 35px;
+  }
+  span{
+    font-size: 20px;
+  }
+}
+.answer-panel{
+  margin-top: 20px;
+}
+.post-answer-panel{
+  margin-top: 10px;
+}
+.comments-panel{
+  padding-left: 50px;
+  margin-top: 50px;
+  border-top: #e1ecf4 solid 1.5px;
+  .comment-body{
+    font-size: 14px;
+    border-bottom: #e1ecf4 solid 1px;
+    p{
+      margin-bottom: 0px;
+      color: grey;
+      .comment-user{
+        color: #07C;
+      }
+    }
+  }
+  form{
+    .btn{
+      font-size: 14px !important;
+    }
+  }
+}

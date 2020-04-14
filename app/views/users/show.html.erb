@@ -1,0 +1,10 @@
+<% content_for :sidebar_tag_users do %>
+  active
+<% end %>
+<div class="container">
+  <%= image_tag @user.avatar.url(:medium), class: "pull-left", style: "margin-right: 20px;" %>
+  <h5><strong><%=@user.name%></strong></h5>
+  <p><%=@user.email%></p>
+  <%= link_to 'Edit', edit_user_path(@user) %>
+</div>
+<br><br>

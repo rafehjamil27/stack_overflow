@@ -1,0 +1,43 @@
+<div class="answer-body">
+  <div class="vote pull-left col-lg-1">
+    <% if user_signed_in? %>
+      <%= link_to raw('<i class="fas fa-caret-square-up"></i>'), "/votes/create?answer_id=#{answer.id}", remote: true %>
+    <% end %>
+    <br>
+    <span class="answer-vote-<%=answer.id%>"><%= answer.votes.to_a.sum {|vote| vote.count} %></span><br>
+    <% if user_signed_in? %>
+      <%= link_to raw('<i class="fas fa-caret-square-down"></i>'), "/votes/destroy?answer_id=#{answer.id}", method: :delete, remote: true %>
+    <% end %>
+  </div>
+  <p><%=answer.body%></p>
+  <% if current_user %>
+    <% if can? :manage, answer %>
+      <%= link_to 'Delete', "/answers/#{answer.id}", method: :delete, class: "pull-right", style: "margin-left: 10px;", remote: true %>
+      <%= link_to 'Edit', "/answers/#{answer.id}/edit", class: "pull-right" %>
+    <% end %>
+  <% end %>
+  <br><br>
+  <div class="posted-by pull-right">
+    <span>Answered on: <%= answer.created_at.strftime("%b %-d`%y at %H:%M") %></span>
+    <p><%= answer.user.name %></p>
+  </div>
+  <br>
+  <br>
+  <div class="comments-panel">
+    <div id="comments-<%=answer.id%>">
+      <%= render(answer.comments) %>
+    </div>
+    <% if can? :create, Comment %>
+    <%= form_tag(comments_path, class: "col-lg-8", remote: true) do %>
+      <%= hidden_field_tag :answer_id, answer.id %>
+      <div class="form-group">
+        <%= label_tag :body, "Your Comment" %><br>
+          <%= text_area_tag(:body, "", class: "form-control comment-area", rows: 2, required: "yes") %>
+      </div>
+      <div class="form-group">
+      <%= submit_tag("Post Your Comment", class: "btn btn-primary btn-sm pull-right") %>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+$('.user-body').html("<%= escape_javascript render(@users) %>");
+<% if @error %>
+  alert(<%= @error %>);
+<% end %>

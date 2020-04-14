@@ -1,0 +1,6 @@
+<% if @error %>
+  alert("<%= @error %>");
+<% else %>
+  $("#<%=@comment_id%>").html("<%= escape_javascript render(@comments) %>")
+  $('.comment-area').val("")
+<% end %>

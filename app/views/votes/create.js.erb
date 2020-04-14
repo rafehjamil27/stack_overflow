@@ -1,0 +1,5 @@
+<% if @error %>
+  alert("<%= @error %>");
+<% else %>
+  $(".<%= @select_id %>").html("<%= @resource.votes.to_a.sum {|vote| vote.count}%>")
+<% end %>

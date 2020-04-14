@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StackOverflow</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <%= csrf_meta_tags %>
+</head>
+<body class='<%= controller.controller_name %>'>
+  <header>
+    <!-- top navigational bar -->
+    <%= render "shared/topbar" %>
+  </header>
+
+  <div class="banner container-fluid" style="display: none !important">
+    <%= render "shared/banner" %>
+  </div>
+
+  <div class="page-content row">
+    <!-- side navigational bar -->
+    <%= render "shared/sidebar" %>
+
+    <div class="main-content col-lg-10">
+      <!-- page alerts and flash messages -->
+      <%= render "shared/alerts" %>
+
+      <%= yield %>
+    </div>
+  </div>
+
+  <div class="footer">
+    <%= render "shared/footer" %>	
+  </div>
+</body>
+</html>

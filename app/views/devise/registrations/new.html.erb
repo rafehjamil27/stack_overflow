@@ -1,0 +1,71 @@
+<% content_for :sidebar_tag_users do %>
+  active
+<% end %>
+<div class="container">
+  <div class="container-header col-lg-12">
+    <div class="header-tabs row">
+      <div class="tab-button">
+        <p><a href="<%= new_user_session_path %>">Log in</a> </p>
+      </div>
+      <div class="tab-button active">
+        <p><a href="<%= new_user_registration_path %>">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="container-body col-lg-12">
+    <% if flash[:notice] %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <%= flash[:notice] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% end %>
+    <h5>Create your Stack Overflow account. It's free and only takes a minute.</h5>
+    <div class="row center-block justify-content-center align-items-center">
+      <div class="login-form row col-lg-5 justify-content-center">
+        <div class="col-lg-12 social-btns">
+          <button type="button" class="btn btn-block btn-outline-light btn-google"><i class="fab fa-google"></i> Google</button>
+          <button type="button" class="btn btn-block btn-outline-primary btn-facebook"><i class="fab fa-facebook"></i>  Facebook</button>
+        </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="form-group">
+            <%= f.label(:name, 'Display Name' )%><br>
+            <%= f.text_field(:name, class: "form-control form-control-sm", placeholder: "J. Doe", autofocus: true) %>
+          </div>
+          <div class="form-group">
+            <%= f.label(:email, "Email (required, but never shown)") %><br>
+            <%= f.text_field(:email, class: "form-control form-control-sm", placeholder: "you@example.com") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %><br>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br /><br>
+            <%= f.password_field(:password, class: "form-control form-control-sm", placeholder: "******") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %><br>
+            <%= f.password_field(:password_confirmation, class: "form-control form-control-sm", placeholder: "*****") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :avatar %><br>
+            <%= f.file_field :avatar %>
+          </div>
+          <div class="form-group">
+            <%= f.submit("Sign Up", class: "btn btn-primary btn-lg pull-right form-control") %>
+          </div><br>
+          <div class="policy form-group">By clicking "Sign up", you acknowledge that you have read our updated <span>terms of service, privacy policy </span>and <span>cookie policy</span>, and that your continued use of the website is subject to these policies.</div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row center-block justify-content-center align-items-center">
+      <div class="col-lg-5 login-form">
+        <p class="help-text">Already have an account? <a href="<%= new_user_session_path %>">Log in</a></p>
+        <p class="help-text">Are you an employer? <a href="#">Log in Talent</a></p>
+      </div>
+    </div>
+  </div>
+</div>
